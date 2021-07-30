@@ -1,0 +1,18 @@
+
+
+#eventslist
+{
+  background-color: rgb(247, 247, 247);
+}
+
+.round-corner {
+  -webkit-border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -o-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+#item
+{
+  border-style: outset;
+}

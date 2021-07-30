@@ -1,0 +1,101 @@
+
+<body>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div id ="headerstyle" class="col-md-12">
+          <div class="container">
+            <div class="row">
+
+              <div class="col-md-6" id="logo">
+                <img src="assets/img/logo.png" height="50px" width="50px" align="left"/><h2 id="headerfont"  align="left" >EasyRacing</h2>
+              </div>
+              <div class="col-md-2">
+
+              </div>
+              <div class="col-md-4">
+                <div *ngIf="isLogged===1">
+                <button class="headers"(click)="logout()" >Wyloguj</button>
+                </div>
+                <div *ngIf="isLogged===0">
+                  <button class="headers"(click)="register()" >Rejestracja</button>
+                  </div>
+                  <div *ngIf="isLogged===2">
+                    <button class="headers"(click)="logout()" >Logowanie</button>
+                    </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isLogged === 0" >
+      <app-login></app-login>
+    </div>
+
+    <div *ngIf="isLogged === 2" >
+      <app-register></app-register>
+    </div>
+
+    <div *ngIf="isLogged === 1" >
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-12" >
+
+          <mat-sidenav-container  id="sidecontainer" >
+            <mat-sidenav mode="side" opened="true" id="side">
+
+              <mat-nav-list id="side">
+                <mat-list-item (click) = "getToEvents(1)" >
+                  <i class="material-icons">event</i>
+                  <a style="color:black">Eventy</a>
+                </mat-list-item>
+                <div *ngIf="roleNumber === 3" >
+                <mat-list-item (click) = "getToEvents(4)" >
+                  <i class="material-icons">event</i>
+                  <a style="color:black">Moje Eventy</a>
+                </mat-list-item>
+                </div>
+                <div *ngIf="roleNumber === 1" >
+                  <mat-list-item (click) = "getToEvents(5)" >
+                    <i class="material-icons">event</i>
+                    <a style="color:black">Biorę udział</a>
+                  </mat-list-item>
+                  </div>
+                <div *ngIf="roleNumber === 1" >
+                <mat-list-item (click)="getToVechicles(1)">
+                  <i class="material-icons">directions_car</i>
+                   <a style="color:black"> Pojazdy</a>
+                   </mat-list-item>
+                </div>
+                <div *ngIf="roleNumber === 1" >
+                <mat-list-item (click)="getToVechicles(2)">
+                   <i class="material-icons">add</i>
+                   <a style="color:black"> Dodaj Pojazd </a>
+                  </mat-list-item>
+                </div>
+                <div *ngIf="roleNumber === 3" >
+                <mat-list-item (click)="getToEvents(3)">
+                  <i class="material-icons">add</i>
+                  <a style="color:black"> Dodaj Event</a>
+                </mat-list-item>
+                </div>
+              </mat-nav-list>
+
+            </mat-sidenav>
+            <mat-sidenav-content id="content">
+              <router-outlet ></router-outlet>
+            </mat-sidenav-content>
+          </mat-sidenav-container>
+
+        </div>
+
+      </div>
+    </div>
+</div>
+
+</body>
+

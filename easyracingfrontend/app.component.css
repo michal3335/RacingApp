@@ -1,0 +1,79 @@
+.headers {
+
+   float: right;
+   background:none;
+   border:none;
+   color: white;
+   margin-top: 10px;
+  }
+
+.container-fluid
+{
+padding-left: 0px;
+padding-right: 0px;
+}
+
+body {background-color:rgba(245, 245, 245);}
+
+
+
+#headerstyle{
+  margin: 0 auto;
+  text-align: center;
+  width:  100%;
+  color: white;
+  background-color: rgb(173, 14, 35);
+  border-style: outset;
+
+
+}
+
+#headerfont{
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+
+}
+
+#rowcolor {
+
+  background:rgb(245, 245, 245);
+
+}
+
+
+#side{
+  background: rgba(245,245, 245);
+
+}
+#sidecontainer{
+
+  height: 550px;
+  border-radius: 18px;
+  color: black;
+
+  background: rgba(245,245, 245);
+    border-style: outset;
+
+}
+#content{
+  background: rgb(255, 255, 255);
+}
+
+.material-icons {
+  color: #000;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  text-rendering: optimizeLegibility;
+
+}

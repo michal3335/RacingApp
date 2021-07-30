@@ -1,0 +1,311 @@
+
+<div *ngIf="divChange === 1" >
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Nazwa</th>
+    <th>Lokalizacja</th>
+    <th>Data</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let event of events | async" (click)="checkEvent(event.id)">
+          <td>{{event.name}}</td>
+          <td>{{event.localization}}</td>
+          <td>{{event.date  | date}}</td>
+
+          <td><button type="button" class="btn btn-success" (click)="checkEvent(event.id)" style="float: right;">Sprawdź</button></td>
+          </tr>
+  </tbody>
+    </table>
+
+</div>
+
+<!-- wyświetlanie poszczególnego eventu-->
+
+<div *ngIf="divChange === 2" >
+  <div class="container">
+    <div class="row">
+
+        <div class="col-md-4">
+          <img  [src]="src" height="250px" width="400px"/>
+          <br/>
+        </div>
+        <div class="col-md-2">
+
+
+        </div>
+        <div class="col-md-6">
+          {{this.choosen.description}}
+        </div>
+
+      </div>
+      <div class="row">
+
+        <div class="cold-md-8">
+          <br/>
+          Konkurencje
+          <br/>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>nazwa</th>
+              <th>zasady</th>
+              <th>dystans</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let comp of competitions | async"  (click)="showCompetitionDrivers(comp.id)" >
+                    <td>{{comp.name}}</td>
+                    <td>{{comp.rules}}</td>
+                    <td>{{comp.distance}}</td>
+                    <td><button type="button" class="btn btn-success" (click)="showCompetitionDrivers(comp.id)" style="float: right;">Kierowcy</button></td>
+                    <td><button type="button" class="btn btn-primary" (click)="showResults(comp.id)" style="float: right;">Wyniki</button></td>
+                    <td>
+                    <div *ngIf="role === 'driver'" >
+                    <button type="button" class="btn btn-danger" (click)="cancelJoin(comp.id)">Odejdź</button>
+                    </div>
+                    </td>
+                    <td>
+                    <div *ngIf="role === 'driver'" >
+                    <button type="button" class="btn btn-success" (click)="join(comp.id)" style="float: right;">Dołącz</button>
+                    </div>
+                    </td>
+                    </tr>
+            </tbody>
+              </table>
+        </div>
+      </div>
+
+        <div class="row">
+
+        <div class="cold-md-8">
+          Kierowcy
+          <br/>
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Data urodzenia</th>
+              </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let driver of competitionDrivers | async" >
+                      <td>{{driver.name}}</td>
+                      <td>{{driver.surname}}</td>
+                      <td>{{driver.birth | date}}</td>
+                      <td><button type="button" class="btn btn-success" (click)="checkDriver(driver.id)" style="float: right;">sprawdź</button></td>
+                      </tr>
+              </tbody>
+                </table>
+        </div>
+        </div>
+
+
+      </div>
+
+  </div>
+
+
+<div *ngIf="divChange === 3" >
+
+<div class= "container">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <form #newevent = "ngForm" (ngSubmit) = "onClickSubmit(newevent.value)" >
+              <p></p>
+                <input type = "text" name = "name" placeholder = "nazwa" ngModel>
+                <br/>
+                <p></p>
+                <input type = "text" name = "localization" placeholder = "lokalizacja" ngModel>
+                <br/>
+                <p></p>
+                <input type = "date" name = "date" placeholder = "data" ngModel>
+                <br/>
+                <p></p>
+                <textarea rows="3" cols="25" id = "input"   name = "description" placeholder = "opis" ngModel></textarea>
+                <br/>
+                <p></p>
+                <button (click)="fileInput.click()">Select File</button>
+                <br/>
+                <p></p>
+
+                <input type = "submit" class="btn btn-primary" value = "submit">
+                <br/>
+             </form>
+          </div>
+    </div>
+<p></p>
+
+    <img [src]="url" height="200"> <br/>
+
+    <input
+    style="display: none"
+    type="file" (change)="onFileChanged($event)"
+    #fileInput>
+
+</div>
+
+</div>
+
+<div *ngIf="divChange === 4" >
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Nazwa</th>
+    <th>Lokalizacja</th>
+    <th>Data</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let event of OrganiserEvents | async" (click)="checkEvent(event.id)">
+          <td>{{event.name}}</td>
+          <td>{{event.localization}}</td>
+          <td>{{event.date | date}}</td>
+          <td><button type="button" class="btn btn-primary" (click)="addCompetition(event.id)" style="float: right;">Edytuj konkurencję</button></td>
+          <td><button type="button" class="btn btn-danger" (click)="deleteEvent(event.id)" style="float: right;">Usuń</button></td>
+          <td><button type="button" class="btn btn-success" (click)="checkEvent(event.id)" style="float: right;">Sprawdź</button></td>
+          </tr>
+  </tbody>
+    </table>
+
+</div>
+
+<div *ngIf="divChange === 5" >
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>Lokalizacja</th>
+      <th>Data</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let event of DriverEvents | async" (click)="checkEvent(event.id)">
+            <td>{{event.name}}</td>
+            <td>{{event.localization}}</td>
+            <td>{{event.date | date}}</td>
+            <td><button type="button" class="btn btn-success" (click)="checkEvent(event.id)" style="float: right;">Sprawdź</button></td>
+            </tr>
+    </tbody>
+      </table>
+
+</div>
+
+
+  <div *ngIf="divChange === 6" >
+
+    <div class= "container">
+        <div class="row">
+
+            <div class="col-md-6">
+              <p></p>
+              <p></p>
+                <form #newcompetition = "ngForm" (ngSubmit) = "onClickSubmitCompetition(newcompetition.value)" >
+                    <input type = "text" name = "name" placeholder = "name" ngModel>
+                    <br/>
+                    <p></p>
+                    <input type = "text" name = "rules" placeholder = "rules" ngModel>
+                    <br/>
+                    <p></p>
+                    <input type = "text" name = "distance" placeholder = "distance" ngModel>
+                    <br/>
+
+                    <input type = "submit" value = "submit">
+                 </form>
+              </div>
+        </div>
+        <div class="row">
+
+              <div class="cold-md-6">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th>nazwa</th>
+                    <th>zasady</th>
+                    <th>dystans</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let comp of competitions | async"  (click)="showCompetitionDrivers(comp.id)" >
+                          <td>{{comp.name}}</td>
+                          <td>{{comp.rules}}</td>
+                          <td>{{comp.distance}}</td>
+                          <td><button type="button" class="btn btn-danger" (click)="deleteCompetition(comp.id)" style="float: right;">Usuń</button></td>
+                          </tr>
+                  </tbody>
+                    </table>
+              </div>
+        </div>
+
+
+    </div>
+
+  </div>
+
+<div *ngIf="divChange === 7" >
+
+<!-- dodawanie czasów-->
+    <div *ngIf="this.role === 'organiser'" >
+
+      <div class= "container">
+          <div class="row">
+
+              <div class="col-md-6">
+                <p></p>
+                <p></p>
+                  <form #newresult = "ngForm" (ngSubmit) = "onClickSubmitResult(newresult.value)" >
+                      <input type = "text" name = "name" placeholder = "imię" ngModel>
+                      <br/>
+                      <p></p>
+                      <input type = "text" name = "surname" placeholder = "nazwisko" ngModel>
+                      <br/>
+                      <p></p>
+                      <input type = "text" name = "time" placeholder = "czas" ngModel>
+                      <br/>
+                      <p></p>
+                      <input type = "text" name = "score" placeholder = "liczba punktów" ngModel>
+                      <br/>
+
+                      <input type = "submit" value = "submit">
+                   </form>
+                </div>
+          </div>
+      </div>
+    </div>
+  <!-- wyświetlanie czasów-->
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>imie</th>
+        <th>nazwisko</th>
+        <th>czas</th>
+        <th>punkty</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let result of results | async">
+              <td>{{result.name}}</td>
+              <td>{{result.surname}}</td>
+              <td>{{result.time}}</td>
+              <td>{{result.score}}</td>
+              <div *ngIf="this.role === 'organiser'" >
+              <td><button type="button" class="btn btn-danger" (click)="deleteResult(result.id)" style="float: right;">Usuń</button></td>
+              </div>
+              </tr>
+      </tbody>
+        </table>
+
+</div>
